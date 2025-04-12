@@ -1,0 +1,26 @@
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
+  if (taskText === "") return;
+
+  const li = document.createElement("li");
+  li.className = "flex justify-between items-center bg-gray-800 p-4 rounded-lg group transition hover:bg-gray-700";
+
+  const taskTextSpan = document.createElement("span");
+  taskTextSpan.className = "flex-1 cursor-pointer";
+  taskTextSpan.textContent = taskText;
+  taskTextSpan.onclick = () => {
+    taskTextSpan.classList.toggle("line-through");
+    taskTextSpan.classList.toggle("text-gray-400");
+  };
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.className = "ml-4 text-red-400 hover:text-red-600 transition text-xl";
+  deleteBtn.innerHTML = "&#10006;";
+  deleteBtn.onclick = () => li.remove();
+
+  li.appendChild(taskTextSpan);
+  li.appendChild(deleteBtn);
+  document.getElementById("taskList").appendChild(li);
+  taskInput.value = "";
+}
